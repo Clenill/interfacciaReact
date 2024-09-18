@@ -1,17 +1,34 @@
-.btn-outline-success {
-    margin-right: 10px; /* Aggiungi margine destro */
-    color: black; /* Cambia il colore del testo a nero */
-  }
+/* Aggiungi maggiore specificità per sovrascrivere le regole di Bootstrap */
+
+/* Colore del testo nero per entrambi i bottoni */
+button.custom-login-btn,
+button.custom-signup-btn {
+  color: black !important; /* Forza il testo nero */
+  margin-right: 10px;
+}
+
+/* Stile per il bottone di signup */
+button.custom-signup-btn {
+  background-color: lightgray !important; /* Forza il bottone di signup grigio */
+  border-color: lightgray !important;
+  color: black !important;
+}
+
+/* Cambio colore al passaggio del mouse */
+button.custom-signup-btn:hover {
+  background-color: darkgreen !important; /* Verde scuro al passaggio del mouse */
+  border-color: darkgreen !important;
+  color: white !important; /* Testo bianco al passaggio del mouse */
+}
+
+/* Stile aggiuntivo per il bottone di login (se necessario) */
+button.custom-login-btn {
+  color: black !important; /* Testo nero per il bottone login */
   
-  .btn-outline-success:hover {
-    color: white; /* Cambia il colore del testo a bianco quando è in hover */
-  }
-  
-  .btn-outline-secondary {
-    margin-right: 10px; /* Aggiungi margine destro */
-    color: gray; /* Cambia il colore del testo a nero */
-  }
-  
-  .btn-outline-secondary:hover {
-    color: white; /* Cambia il colore del testo a bianco quando è in hover */
-  }
+}
+
+button.custom-login-btn:hover {
+  background-color: blue !important; /* Sfondo blu scuro al passaggio del mouse */
+  border-color: blue !important;
+  color: white !important; /* Testo bianco al passaggio del mouse */
+}

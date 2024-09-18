@@ -41,18 +41,13 @@ function NavBarInf({ imageSrcPath }: NavBarProps) {
         <form className="d-flex ml-auto">
           {/* Pulsante per aprire la Login Modal */}
           <Button
-            className="btn btn-outline-success mr-2"
+            className="btn custom-login-btn mr-2"
             type="button"
-            style={{ color: "black" }}
             onClick={handleOpenLoginModal}
           >
             Log in
           </Button>
-          <Button
-            className="btn btn-outline-secondary"
-            type="button"
-            style={{ color: "black", background: "gray" }}
-          >
+          <Button className="btn custom-signup-btn" type="button">
             SignUp
           </Button>
         </form>
