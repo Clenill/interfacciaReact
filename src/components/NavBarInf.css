@@ -1,0 +1,17 @@
+.btn-outline-success {
+    margin-right: 10px; /* Aggiungi margine destro */
+    color: black; /* Cambia il colore del testo a nero */
+  }
+  
+  .btn-outline-success:hover {
+    color: white; /* Cambia il colore del testo a bianco quando è in hover */
+  }
+  
+  .btn-outline-secondary {
+    margin-right: 10px; /* Aggiungi margine destro */
+    color: gray; /* Cambia il colore del testo a nero */
+  }
+  
+  .btn-outline-secondary:hover {
+    color: white; /* Cambia il colore del testo a bianco quando è in hover */
+  }

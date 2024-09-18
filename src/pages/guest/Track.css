@@ -1,0 +1,75 @@
+/* Track.css */
+.track-page {
+    padding: 20px;
+  }
+  
+  .tracking-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .tracking-form input {
+    margin-right: 10px;
+    padding: 5px;
+    width: 250px;
+  }
+  
+  .item-cards {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .item-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #fff;
+    width: 300px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .item-card h4 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+  }
+  
+  .item-card p {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  .item-info {
+    margin: 10px 0;
+  }
+  
+  .item-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
