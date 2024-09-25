@@ -1,0 +1,19 @@
+.no-wrap {
+  flex-wrap: nowrap; /* Impedisce che le colonne vadano in colonna */
+}
+
+.sidebar-left, .sidebar-right {
+  min-width: 200px; /* Imposta una larghezza minima per le sidebar */
+  max-width: 250px; /* Imposta una larghezza massima */
+}
+
+.main-content {
+  min-width: 500px; /* Imposta una larghezza minima per il contenuto principale */
+}
+
+/* Evita che il contenuto si riduca troppo */
+@media (max-width: 768px) {
+  .main-content, .sidebar-left, .sidebar-right {
+    min-width: 150px; /* Per schermi ancora più piccoli */
+  }
+}

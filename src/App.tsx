@@ -7,6 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import AppContent from "./AppContent";
+import { AuthProvider } from "./AuthContext"; // Import del contesto
 
 interface RouteProps {
   component: React.FC;
@@ -15,9 +16,11 @@ interface RouteProps {
 
 const App: React.FC = () => {
   return (
-    <Router basename="/folou">
-      <AppContent />
-    </Router>
+    <AuthProvider>
+      <Router basename="/folou">
+        <AppContent />
+      </Router>
+    </AuthProvider>
   );
 };
 

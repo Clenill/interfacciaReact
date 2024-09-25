@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import axios from "axios";
+import { useAuth } from "../AuthContext";
 
 interface LoginModalProps {
   show: boolean;
@@ -11,6 +12,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, handleClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const { login } = useAuth(); // Ottieni la funzione di login dal context
 
   const handleLogin = async () => {
     try {
@@ -30,8 +32,12 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, handleClose }) => {
         }
       );
 
-      // gestione risposta, es. salvando il token o reindirizzando l'utente
+      // Simulazione del login al successo della richiesta
       console.log("Login success", response.data);
+
+      // Effettua il login aggiornando lo stato dell'utente
+      login(); // Chiamata al contesto di autenticazione per impostare lo stato come autenticato
+
       handleClose(); // Chiudi il modal dopo il login
     } catch (error) {
       //gestione degli errori (credenziali errate per ora)
