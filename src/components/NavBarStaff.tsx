@@ -7,7 +7,6 @@ const StaffNavbar: React.FC = () => {
   return (
     <nav className="staff-navbar">
       <div className="navbar-header">
-        <div className="navbar-brand">Navbar Staff</div>
         <div className="navbar-welcome bg-secondary text-white p-2 mb-3">
           Welcome back USERNAME
         </div>

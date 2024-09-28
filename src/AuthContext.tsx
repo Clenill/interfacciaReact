@@ -6,21 +6,25 @@ import React, {
   useMemo,
 } from "react";
 
-// Definiamo il contesto e il tipo
+// Definizione del tipo di contesto con i dettagli dell'utente
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: () => void;
+  user: {
+    ownerName: string;
+    email: string;
+    description?: string;
+    telephone?: string;
+  } | null;
+  login: (userData: any) => void;
   logout: () => void;
 }
 
-// Aggiunta di un'interfaccia per le proprietà del provider, specificando `children`
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Hook per usare il contesto
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -29,17 +33,23 @@ export const useAuth = () => {
   return context;
 };
 
-// Provider del context
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<AuthContextType["user"]>(null);
 
-  const login = () => setIsAuthenticated(true);
-  const logout = () => setIsAuthenticated(false);
+  const login = (userData: any) => {
+    setIsAuthenticated(true);
+    setUser(userData);
+  };
 
-  // Memorizza il valore passato al Provider per evitare la ricreazione ad ogni render
+  const logout = () => {
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
   const value = useMemo(
-    () => ({ isAuthenticated, login, logout }),
-    [isAuthenticated]
+    () => ({ isAuthenticated, user, login, logout }),
+    [isAuthenticated, user]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

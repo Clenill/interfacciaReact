@@ -16,32 +16,59 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, handleClose }) => {
 
   const handleLogin = async () => {
     try {
-      // Corpo della richiesta formattato come JSON
       const requestBody = {
         email: email,
         password: password,
       };
-      // Invio della richiesta POST al server
-      const response = await axios.post(
+      // Prima richiesta: login
+      const loginResponse = await axios.post(
         "http://localhost:5001/folou/guest/login",
         requestBody,
         {
-          headers: {
-            "Content-Type": "application/json", // Specifica che il contenuto è in formato JSON
-          },
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true, //consente l'invio e la ricezione dei cookie di sessione
         }
       );
 
-      // Simulazione del login al successo della richiesta
-      console.log("Login success", response.data);
+      const loginData = loginResponse.data;
 
-      // Effettua il login aggiornando lo stato dell'utente
-      login(); // Chiamata al contesto di autenticazione per impostare lo stato come autenticato
-
-      handleClose(); // Chiudi il modal dopo il login
+      if (loginData.success) {
+        console.log("CONSOLE LOG PRIMO");
+        console.log("Login success:", loginData);
+        // Seconda richiesta: Ottieni i dettagli dell'utente dopo il login
+        const userDetailsResponse = await axios.get(
+          "http://localhost:5001/folou/staff/getOwnerInfos", // Endpoint per ottenere i dettagli dell'utente
+          {
+            withCredentials: true, // Usa il token o il nome restituito
+          }
+        );
+        console.log("CONSOLE LOG SECONDO");
+        console.log("User details response:", userDetailsResponse);
+        //userData is undefined
+        //const userData = userDetailsResponse.data.data.result[0];
+        // Verifica che la struttura del JSON sia quella attesa
+        if (
+          userDetailsResponse.data &&
+          userDetailsResponse.data.data &&
+          userDetailsResponse.data.data.result
+        ) {
+          const companyData = userDetailsResponse.data.data.result;
+          // Aggiorna lo stato di autenticazione con i dati dell'utente
+          login({
+            ownerName: companyData.name,
+            email: companyData.contacts.email,
+            description: companyData.description,
+            telephone: companyData.contacts.telephone,
+          });
+        } else {
+          throw new Error("Company data not found.");
+        }
+        handleClose(); // Chiudi il modal dopo il login
+      } else {
+        setErrorMessage("Login failed, please try again.");
+      }
     } catch (error) {
-      //gestione degli errori (credenziali errate per ora)
-      console.error("Login Failed, error");
+      console.error("Login Failed", error);
       setErrorMessage("Invalid Email or/and Password, try again.");
     }
   };
