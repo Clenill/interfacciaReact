@@ -2,13 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./NavbarStaff.css";
+import { useAuth } from "./../AuthContext";
 
 const StaffNavbar: React.FC = () => {
+  const { user } = useAuth(); // Accedi all'ownerName dal contesto
   return (
     <nav className="staff-navbar">
       <div className="navbar-header">
         <div className="navbar-welcome bg-secondary text-white p-2 mb-3">
-          Welcome back USERNAME
+          Welcome back {user?.ownerName ?? "Undefined"}
         </div>
       </div>
       <ul className="navbar-links">

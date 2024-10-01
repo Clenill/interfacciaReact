@@ -1,0 +1,13 @@
+.staff-layout {
+    display: flex;
+  }
+  
+  .staff-content {
+    flex-grow: 1;
+    padding-left: 20px; /* distanza dalla navbar */
+  }
+  
+  .staff-content .container {
+    margin-top: 20px;
+  }
+  

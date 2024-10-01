@@ -18,6 +18,7 @@ const InvolvedCompany: React.FC = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  //JSON.stringify
   //------------Funzione per recuperare i dati dal server
   useEffect(() => {
     const fetchCompanies = async () => {

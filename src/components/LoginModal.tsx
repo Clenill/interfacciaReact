@@ -17,6 +17,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, handleClose }) => {
   const handleLogin = async () => {
     try {
       const requestBody = {
+        // validazione dei campi prima di inviare la richiesta?
         email: email,
         password: password,
       };

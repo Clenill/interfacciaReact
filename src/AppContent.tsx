@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFoud";
 import Header from "./components/Header";
 import StaffHome from "./pages/staff/Home";
 import NavBarStaff from "./components/NavBarStaff";
+import "./pages/staff/Staff.css";
 
 const AppContent: React.FC = () => {
   const { isAuthenticated } = useAuth(); // Ottieni lo stato di autenticazione
@@ -37,16 +38,19 @@ const AppContent: React.FC = () => {
       <Header pageTitleHead={pageTitle} />
 
       {isAuthenticated ? (
-        <>
-          <NavBarStaff /> {/* Mostra la navbar dello staff se connesso */}
-          <div className="container mt-3">
+        <div className="staff-layout">
+          <NavBarStaff />{" "}
+          {/* Navbar a sinistra. Staff-Layout per la sezione staff */}
+          <div className="staff-content">
+            {" "}
+            {/* Contenuto a destra */}
             <Routes>
               <Route path="/staff/home" element={<StaffHome />} />
               <Route path="*" element={<Navigate to="/staff/home" />} />{" "}
               {/* Reindirizza alla home staff */}
             </Routes>
           </div>
-        </>
+        </div>
       ) : (
         <>
           <NavBarInf imageSrcPath={imagePath} />

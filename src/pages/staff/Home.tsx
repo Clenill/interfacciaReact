@@ -1,23 +1,27 @@
-// pages/staff/Home.tsx
 import React from "react";
-import { useAuth } from "./../../AuthContext";
+import DocumentStats from "./DocumentStats";
+import StatisticsChart from "./StatisticsChart";
+import "./StaffHome.css";
 
-const Home: React.FC = () => {
-  const { user } = useAuth();
-
+const StaffHome: React.FC = () => {
   return (
-    <div className="home">
-      <h1>Welcome, {user?.ownerName || "Guest"}!</h1>
-      {user && (
-        <>
-          <p>Email: {user.email}</p>
-          <p>Description: {user.description}</p>
-          <p>Telephone: {user.telephone}</p>
-        </>
-      )}
-      <p>This is the home page of our React application for guests.</p>
+    <div className="staff-home d-flex">
+      <div className="content flex-grow-1">
+        <div className="d-flex justify-content-between">
+          <DocumentStats title="Documents uploaded" count={20} />
+          <DocumentStats title="Documents certified" count={15} />
+        </div>
+        <div className="d-flex justify-content-between">
+          <StatisticsChart title="Statistics 1" />
+          <StatisticsChart title="Statistics 2" />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Home;
+export default StaffHome;
+
+//const { user } = useAuth();
+// Si accede ai dati dell'utente autenticato usanto il contesto di autenticazione
+//con l'hook useAuth.
