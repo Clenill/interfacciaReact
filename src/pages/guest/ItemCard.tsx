@@ -4,14 +4,25 @@ import "./Track.css";
 interface ItemCardProps {
   title: string;
   description: string;
-  isCertified: boolean;
+  supplyChainID: string;
+  contributor: string;
+  processId: string;
+  uploadingTimestamp: string;
+  certRequestTimestamp?: string; // Campo per determinare se è certificato
+  transactionHash?: string;
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({
   title,
   description,
-  isCertified,
+  supplyChainID,
+  contributor,
+  processId,
+  uploadingTimestamp,
+  certRequestTimestamp,
+  transactionHash,
 }) => {
+  const isCertified = !!certRequestTimestamp; // Se certRequestTimestamp esiste, è certificato
   return (
     <div className="item-card">
       {/* Titolo e descrizione */}
@@ -21,27 +32,29 @@ const ItemCard: React.FC<ItemCardProps> = ({
       {/* Informazioni dell'item */}
       <div className="item-info">
         <div>
-          <strong>Supply chain id:</strong> SC123456
+          <strong>Supply chain id:</strong> {supplyChainID}
         </div>
         <div>
-          <strong>Contributor:</strong> Contributor Name
+          <strong>Contributor:</strong> {contributor}
         </div>
         <div>
-          <strong>Process id:</strong> P987654
+          <strong>Process id:</strong> {processId}
         </div>
         <div>
-          <strong>Uploading timestamp:</strong> 2023-09-17 10:00:00
+          <strong>Uploading timestamp:</strong> {uploadingTimestamp}
         </div>
 
         {/* Mostra ulteriori dettagli solo se l'item è certificato */}
         {isCertified && (
           <>
             <div>
-              <strong>Transaction timestamp:</strong> 2023-09-17 10:05:00
+              <strong>Transaction timestamp:</strong> {certRequestTimestamp}
             </div>
-            <div>
-              <strong>Transaction hash:</strong> 0xabcdef1234567890
-            </div>
+            {transactionHash && (
+              <div>
+                <strong>Transaction hash:</strong> {transactionHash}
+              </div>
+            )}
           </>
         )}
       </div>

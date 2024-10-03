@@ -53,8 +53,11 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, handleClose }) => {
           userDetailsResponse.data.data &&
           userDetailsResponse.data.data.result
         ) {
+          // Dal Json ricevuto salvo le informazioni in companyData
           const companyData = userDetailsResponse.data.data.result;
           // Aggiorna lo stato di autenticazione con i dati dell'utente
+          // L'oggetto è passato alla funzione di Login, che aggiorna lo stato
+          //globale dell'utente tramite il context di autenticazione in AuthContext
           login({
             ownerName: companyData.name,
             email: companyData.contacts.email,

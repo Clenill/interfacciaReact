@@ -6,30 +6,56 @@
   .tracking-form {
     display: flex;
     justify-content: center;
+    align-items: center; /* Aggiungi questo per mantenere allineato l'input e il bottone verticalmente */
     margin-bottom: 20px;
+    gap: 10px;
   }
   
   .tracking-form input {
     margin-right: 10px;
     padding: 5px;
     width: 250px;
+    box-sizing: border-box; /* Assicura che il padding non espanda l'elemento oltre i 250px */
   }
+  .tracking-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
   
   .item-cards {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap; /* Permette di andare su più righe */
+    gap: 20px; /* Spaziatura tra le card */
   }
   
   .item-card {
+    flex: 1 1 calc(33.333% - 20px); /* Ogni card occupa circa 1/3 della riga */
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 20px;
+    padding: 15px;
     margin: 20px 0;
     background-color: #fff;
     width: 300px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
-
+  @media (max-width: 768px) {
+    .item-card {
+      flex: 1 1 calc(50% - 20px); /* Su schermi più piccoli, 2 card per riga */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .item-card {
+      flex: 1 1 100%; /* Su schermi molto piccoli, una card per riga */
+    }
+  }
+  
+  
   .item-card h4 {
     margin-bottom: 10px;
     font-size: 1.5rem;
