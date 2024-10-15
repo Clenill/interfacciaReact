@@ -11,6 +11,8 @@ import NotFound from "./pages/NotFoud";
 import Header from "./components/Header";
 import StaffHome from "./pages/staff/Home";
 import NavBarStaff from "./components/NavBarStaff";
+import DocumentStaff from "./pages/staff/MyDocument";
+import AboutStaff from "./pages/staff/About";
 import "./pages/staff/Staff.css";
 
 const AppContent: React.FC = () => {
@@ -26,6 +28,8 @@ const AppContent: React.FC = () => {
       "/guest/upload": "Guest - UPLOAD",
       "/guest/about": "Guest - ABOUT",
       "/staff/home": "Staff - HOME",
+      "/staff/documents": "Staff - Documents",
+      "/staff/infos": "Staff - My Infos",
     };
     // imposta il titolo della pagina in base alla rotta corrente
     const currentTitle = routeTitles[location.pathname] || "Page Not Found";
@@ -46,6 +50,8 @@ const AppContent: React.FC = () => {
             {/* Contenuto a destra */}
             <Routes>
               <Route path="/staff/home" element={<StaffHome />} />
+              <Route path="/staff/documents" element={<DocumentStaff />} />
+              <Route path="staff/infos" element={<AboutStaff />} />
               <Route path="*" element={<Navigate to="/staff/home" />} />{" "}
               {/* Reindirizza alla home staff */}
             </Routes>

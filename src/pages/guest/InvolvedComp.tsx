@@ -46,7 +46,10 @@ const InvolvedCompany: React.FC = () => {
         <div className="company-card" key={company._id}>
           <div className="company-logo">
             {company.logo ? (
-              <img src={company.logo} alt={company.name} />
+              <img
+                src={`data:image/png;base64,${company.logo}`}
+                alt={company.name}
+              />
             ) : (
               "LOGO"
             )}

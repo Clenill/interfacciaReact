@@ -1,0 +1,53 @@
+.staff-documents {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .documents-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .documents-table th, .documents-table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .pagination-button {
+    margin: 0 5px;
+    padding: 5px 10px;
+  }
+  
+  .btn {
+    padding: 5px 10px;
+    margin-right: 5px;
+  }
+  
+  .btn-secondary {
+    background-color: grey;
+    color: white;
+  }
+  
+  .btn-primary {
+    background-color: blue;
+    color: white;
+  }
+  
+  .btn-success {
+    background-color: green;
+    color: white;
+  }
+  
+  .btn-danger {
+    background-color: red;
+    color: white;
+  }
+  

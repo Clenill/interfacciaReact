@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Track.css";
+import ItemModal from "./../../components/ItemModal";
+import CheckIntegrityModal from "./../../components/CheckIntegrityModal";
 
 interface ItemCardProps {
   title: string;
@@ -22,7 +24,21 @@ const ItemCard: React.FC<ItemCardProps> = ({
   certRequestTimestamp,
   transactionHash,
 }) => {
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false); // Stato per la modal View Content
+  const [isChkIntModalOpen, setisChkIntModalOpen] = useState(false); // Stato per la modal Check Proof
+  //Parametri View Modal
+  const openViewModal = () => setIsViewModalOpen(true);
+  const closeViewModal = () => setIsViewModalOpen(false);
+  //Parametri Check Proof
+  const openChkIntModal = () => setisChkIntModalOpen(true);
+  const closeChkIntModal = () => setisChkIntModalOpen(false);
   const isCertified = !!certRequestTimestamp; // Se certRequestTimestamp esiste, è certificato
+
+  // Funzione per formattare la data
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString(); // Ritorna solo la data nel formato locale (es: "11/10/2024" in Italia)
+  };
   return (
     <div className="item-card">
       {/* Titolo e descrizione */}
@@ -61,13 +77,31 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
       {/* Pulsanti di azione */}
       <div className="item-buttons">
-        <button className="btn btn-secondary">View content</button>
+        <button className="btn btn-secondary" onClick={openViewModal}>
+          View content
+        </button>
         {isCertified ? (
-          <button className="btn btn-primary">Check proof</button>
+          <button className="btn btn-primary" onClick={openChkIntModal}>
+            Check proof
+          </button>
         ) : (
           <button className="btn btn-danger">Not certified</button>
         )}
       </div>
+      {/* Modal View Content*/}
+      <ItemModal
+        show={isViewModalOpen}
+        onClose={closeViewModal}
+        processId={processId}
+        uploadingTimestamp={formatDate(uploadingTimestamp)}
+      />
+      {/* Modal Check Proof*/}
+      <CheckIntegrityModal
+        show={isChkIntModalOpen}
+        onClose={closeChkIntModal}
+        uploadingTimestamp={formatDate(uploadingTimestamp)}
+        transactionHash={transactionHash}
+      />
     </div>
   );
 };

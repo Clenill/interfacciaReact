@@ -10,6 +10,20 @@
     margin-bottom: 20px;
     gap: 10px;
   }
+  .track-code-section {
+    display: flex;
+    align-items: center; /* Allinea verticalmente */
+    gap: 10px; /* Spaziatura tra la textbox e il pulsante */
+    margin-top: 20px;
+  }
+  
+  .track-code-section .form-control {
+    flex-grow: 1; /* Fa sì che la textbox occupi lo spazio rimanente */
+  }
+  
+  .track-code-section .btn {
+    white-space: nowrap; /* Evita che il testo del pulsante vada su più righe */
+  }
   
   .tracking-form input {
     margin-right: 10px;
@@ -99,3 +113,13 @@
     background-color: #dc3545;
     color: #fff;
   }
+  .track-filter-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 20px; /* Spaziatura inferiore per separare le sezioni */
+  }
+  
+  

@@ -1,11 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Modal } from "react-bootstrap";
 import "./NavbarStaff.css";
 import { useAuth } from "./../AuthContext";
+import Cookies from "js-cookie";
 
 const StaffNavbar: React.FC = () => {
-  const { user } = useAuth(); // Accedi all'ownerName dal contesto
+  const { user, logout } = useAuth(); // Accedi all'ownerName dal contesto
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Elimina del cookie session
+    Cookies.remove("session_token");
+
+    // Esegui il logout dal contesto
+    logout();
+
+    // Reindirizza alla pagina di login
+    navigate("/guest/home");
+  };
+
   return (
     <nav className="staff-navbar">
       <div className="navbar-header">
@@ -41,10 +56,29 @@ const StaffNavbar: React.FC = () => {
         </li>
       </ul>
       <div className="navbar-footer mt-3">
-        <Button variant="outline-secondary" className="logout-button">
+        <Button
+          variant="outline-secondary"
+          className="logout-button"
+          onClick={() => setShowLogoutModal(true)}
+        >
           Logout
         </Button>
       </div>
+      {/* Modal per conferma logout */}
+      <Modal show={showLogoutModal} onHide={() => setShowLogoutModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Logout</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to logout?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowLogoutModal(false)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleLogout}>
+            Logout
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </nav>
   );
 };
