@@ -27,7 +27,10 @@ const MyDocument: React.FC = () => {
       })
       .then((response) => {
         setDocuments(response.data.data.result.docs);
-        console.log(response.data.data.result.docs.uploadingTimestamp); // Verifica tutta la risposta JSON
+        console.log(response);
+        console.log(
+          response.data.data.result.docs[0].certData.uploadingTimestamp
+        ); // Verifica tutta la risposta JSON
       })
       .catch((error) => {
         console.error("Errore durante il recupero dei documenti:", error);
@@ -72,10 +75,10 @@ const MyDocument: React.FC = () => {
             <tr key={index}>
               <td>{doc.title}</td>
               <td>{doc.supplyChainID}</td>
-              <td>{formatDate(doc.uploadingTimestamp)}</td>
+              <td>{formatDate(doc.certData.uploadingTimestamp)}</td>
               <td>
-                {doc.certRequestTimestamp
-                  ? new Date(doc.certRequestTimestamp).toLocaleDateString()
+                {doc.blockchainData.transactionTimestamp
+                  ? formatDate(doc.blockchainData.transactionTimestamp)
                   : "Not certified"}
               </td>
               <td>

@@ -1,4 +1,7 @@
 .title {
     text-align: center;
   }
+  .dropdown-menu {
+    max-width: 200px; /* Limita la larghezza del menu a tendina */
+  }
   

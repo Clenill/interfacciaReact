@@ -45,8 +45,8 @@
   font-weight: bold;
 }
 .company-logo img {
-  max-width: 200px; /* Imposta la larghezza massima */
-  max-height: 150px; /* Imposta l'altezza massima */
+  max-width: 200px; /* larghezza massima */
+  max-height: 150px; /* altezza massima */
   width: auto; /* Mantiene le proporzioni */
   height: auto; /* Mantiene le proporzioni */
   display: block; /* Assicura che l'immagine non superi il contenitore */

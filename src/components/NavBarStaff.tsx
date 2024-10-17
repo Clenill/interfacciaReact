@@ -13,7 +13,7 @@ const StaffNavbar: React.FC = () => {
   const handleLogout = () => {
     // Elimina del cookie session
     Cookies.remove("session_token");
-
+    //post logout
     // Esegui il logout dal contesto
     logout();
 
