@@ -4,4 +4,28 @@
   .dropdown-menu {
     max-width: 200px; /* Limita la larghezza del menu a tendina */
   }
+  .custom-dropdown {
+    background-color: #6c757d; /* Colore grigio personalizzato */
+    color: white;
+  }
+  .custom-dropdown .dropdown-toggle {
+    background-color: #6c757d; /* Grigio */
+    color: white; /* Testo bianco */
+    border-color: #6c757d; /* Bordo grigio */
+  }
+  .custom-dropdown .dropdown-toggle:hover {
+    background-color: #5a6268; /* Grigio scuro quando passi sopra col mouse */
+    border-color: #5a6268; /* Cambia il bordo anche in hover */
+    color: white;
+  }
+  .custom-dropdown .dropdown-toggle:active,
+.custom-dropdown .dropdown-toggle:focus {
+  background-color: #545b62; /* Grigio ancora più scuro quando cliccato */
+  border-color: #545b62; /* Cambia il bordo quando cliccato */
+  color: white;
+}
   
+  .custom-dropdown .dropdown-menu {
+    background-color: #f8f9fa; /* Colore chiaro per il menu */
+    color: black;
+  }

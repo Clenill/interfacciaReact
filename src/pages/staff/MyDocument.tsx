@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./StaffHome.css";
 import "./MyDocument.css";
+import DocumentModal from "./../../components/DocumentModal";
 
 interface Document {
   title: string;
@@ -12,12 +13,29 @@ interface Document {
   uploadingTimestamp: string;
   certRequestTimestamp?: string;
   transactionHash?: string;
+  certData?: {
+    title: string;
+    description: string;
+    supplyChainID: string;
+    processId: string;
+    date: string;
+    image: string;
+    transactionTimestamp?: string;
+    certRequestTimestamp?: string;
+  };
+  blockchainData?: {
+    transactionTimestamp?: string;
+  };
 }
 
 const MyDocument: React.FC = () => {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
+  const [selectedDocument, setSelectedDocument] = useState<Document | null>(
+    null
+  ); // Stato per il documento selezionato
+  const [isModalOpen, setIsModalOpen] = useState(false); // Stato per gestire la modal
 
   useEffect(() => {
     // Effettua la richiesta GET per ottenere i documenti
@@ -28,14 +46,23 @@ const MyDocument: React.FC = () => {
       .then((response) => {
         setDocuments(response.data.data.result.docs);
         console.log(response);
-        console.log(
-          response.data.data.result.docs[0].certData.uploadingTimestamp
-        ); // Verifica tutta la risposta JSON
       })
       .catch((error) => {
         console.error("Errore durante il recupero dei documenti:", error);
       });
   }, []);
+
+  // Funzione per aprire la modal con il documento selezionato
+  const openModal = (doc: Document) => {
+    setSelectedDocument(doc);
+    setIsModalOpen(true);
+  };
+
+  // Funzione per chiudere la modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedDocument(null);
+  };
 
   // Calcola gli indici per la paginazione
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -46,7 +73,7 @@ const MyDocument: React.FC = () => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
   // Funzione per formattare la data
   const formatDate = (dateString: string) => {
-    if (!dateString) return "Invalid";
+    if (!dateString) return "No Date";
 
     const date = new Date(dateString);
 
@@ -82,15 +109,31 @@ const MyDocument: React.FC = () => {
                   : "Not certified"}
               </td>
               <td>
-                <button className="btn btn-secondary">View details</button>
-                {doc.certRequestTimestamp ? (
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => openModal(doc)}
+                >
+                  View details
+                </button>
+                {/* Condizione per il pulsante "Download proved document" */}
+                {doc.certData?.certRequestTimestamp && (
                   <button className="btn btn-success">
                     Download proved document
                   </button>
-                ) : (
+                )}
+                {/* Condizione per il pulsante "Abort" */}
+                {doc.certData?.transactionTimestamp && !doc.blockchainData && (
+                  <button className="btn btn-warning">Abort</button>
+                )}
+                {!doc.blockchainData && (
                   <>
-                    <button className="btn btn-primary">Certify</button>
-                    <button className="btn btn-danger">Delete</button>
+                    {!doc.certData?.certRequestTimestamp && (
+                      <>
+                        <button className="btn btn-primary">Certify</button>
+                        <button className="btn btn-danger">Delete</button>
+                        <button className="btn btn-info">Edit</button>
+                      </>
+                    )}
                   </>
                 )}
               </td>
@@ -117,6 +160,10 @@ const MyDocument: React.FC = () => {
           Next
         </button>
       </div>
+      {/* Modal */}
+      {isModalOpen && selectedDocument && (
+        <DocumentModal document={selectedDocument} onClose={closeModal} />
+      )}
     </div>
   );
 };

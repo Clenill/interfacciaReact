@@ -84,7 +84,7 @@ const TrackCode: React.FC<TrackCodeProps> = ({ owners }) => {
         <DropdownButton
           id="dropdown-owner"
           title={selectedOwner || "Select Owner"}
-          onSelect={(e) => setSelectedOwner(e || "")}
+          onSelect={(e) => setSelectedOwner(e ?? "")}
           className="mr-3"
         >
           <Dropdown.Item eventKey="">All Owners</Dropdown.Item>
